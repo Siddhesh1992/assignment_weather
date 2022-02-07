@@ -1,8 +1,8 @@
 # Backend expressJS
-## npm i
-## npm start
+### npm i
+### npm start
 
 # In another tab
-## cd client
-## npm i
-## npm run build
+### cd client
+### npm i
+### npm run build
