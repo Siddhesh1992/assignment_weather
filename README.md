@@ -1,8 +1,10 @@
 # Backend expressJS
+## first start Backend
 ### npm i
 ### npm start
+### inside .env you can change mongodb uri
 
-# In another tab
+# Frontend after starting backend start frontend
 ### cd client
 ### npm i
-### npm run build
+### npm start
