@@ -1,14 +1,19 @@
 const cityJson = require('../data-init/cities');
 const City = require('../models/city');
+const axios = require('axios');
+const { APP_ID, W_URI } = process.env;
 
 exports.getCities = async (req, res, next) => {
+  const {skip, limit} = req.query;
   console.log(await City.countDocuments());
-  const cityCount = await City.countDocuments();
+  let cityCount = await City.countDocuments();
 
   if (cityCount == 0) await City.insertMany(cityJson);
 
-  const city = await City.find();
-  res.send({ city, count: city.length });
+  cityCount = await City.countDocuments();
+
+  const city = await City.find().skip(skip).limit(limit);
+  return res.send({ city, count: cityCount });
 };
 
 exports.createCity = async (req, res) => {
@@ -19,11 +24,11 @@ exports.createCity = async (req, res) => {
     return res.status(201).send(`${city.name} created`);
   }
 
-  res.status(409).send(`${city.name} already exists`);
+  return res.status(409).send(`${city.name} already exists`);
 };
 
 exports.getCityByName = async (req, res) => {
     const { city } = req.params;
     const result = await axios.get(`${W_URI}?q=${city}&appid=${APP_ID}`);
-    res.send(result.data.list.splice(0, 5));
+    return res.send(result.data.list.splice(0, 5));
   }

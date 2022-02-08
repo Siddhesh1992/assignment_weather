@@ -6,6 +6,6 @@ router.get('/', cityController.getCities);
 
 router.post('/', cityController.createCity);
 
-router.get('/:city', cityController.getCityByName);
+router.get('/getByCity/:city', cityController.getCityByName);
 
 module.exports = router;
